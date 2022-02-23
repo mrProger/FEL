@@ -19,13 +19,13 @@ class FelSystem {
       String tag;
       String attribute;
 
-      if (mainTagsList.indexOf(elem) == -1 && tagsNoContentList.indexOf(elem) == -1) {
+      if (mainTagsList.indexOf(elem.toLowerCase()) == -1 && tagsNoContentList.indexOf(elem.toLowerCase()) == -1) {
         tag = elem.replaceAllMapped(regExp, (Match match) => '${match[1]}').toString().replaceAll("'", "");
         attribute = elem.replaceAllMapped(regExp, (Match match) => '${match[2] != null ? match[2] : "null"}').toString().replaceAll("'", "");
 
         ret.addAll({tag: attribute});
       }
-      else if (mainTagsList.indexOf(elem) != -1)
+      else if (mainTagsList.indexOf(elem.toLowerCase()) != -1)
         ret.addAll({elem.replaceAllMapped(regExp, (Match match) => match[1].toString()): 'main_tag'});
       else
         ret.addAll({elem.replaceAllMapped(regExp, (Match match) => match[1].toString()): 'null'});
@@ -109,14 +109,14 @@ class FelSystem {
       result = parseLine(subStr);
 
       result.forEach((key, value) {
-        if (result[key] == 'main_tag' && (key == 'html' || key == 'head' || key == 'body'))
-          params['mainTag'] = key;
-        else if (hashMapKeys.indexOf(key) == -1) {
-          params['tag'] = key;
+        if (result[key] == 'main_tag' && (key.toLowerCase() == 'html' || key.toLowerCase() == 'head' || key.toLowerCase() == 'body'))
+          params['mainTag'] = key.toLowerCase();
+        else if (hashMapKeys.indexOf(key.toLowerCase()) == -1) {
+          params['tag'] = key.toLowerCase();
           params['value'] = result[key].toString();
         }
         else
-          params[key] = result[key].toString();
+          params[key.toLowerCase()] = result[key].toString();
       });
 
       compile(params);
