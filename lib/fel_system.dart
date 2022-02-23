@@ -76,7 +76,7 @@ class FelSystem {
           .openRead()
           .map(utf8.decode)
           .transform(new LineSplitter())
-          .forEach((value) => config.code.add(value))
+          .forEach((value) => config.code.add(value.trim()))
           .whenComplete(() => status = true);
     }
     catch(exception, message) {

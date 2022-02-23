@@ -1,0 +1,9 @@
+// Привет, мир!
+	head->hr->width('300')->height('500')
+
+head->js('script.js')
+head->css('style.css')
+head->meta->http-equiv('a')->content('IE=Edge')
+body->p('hello')->class('hello-p test-p')->id('my-id')
+body->button('bye')->class('bye-button test-button')->id('my-button')
+body->img->src('hello')->class('test-img')->id('hello-id')->alt('...')
